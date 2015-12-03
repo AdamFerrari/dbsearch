@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+<%= render 'layouts/nbar' %>
+
+<h1>Search Results</h1>
+
+<p>
+<b> <%= @results.count %> </b> results contain keywords: <b>
+<%= @search_terms.join(" ") %></b>
+</p>
+
+<ul>
+<% @results.each do |result| %>
+  <li> <%= result.id %> - <%= result.content %>
+<% end %>
+  </ul>
+
+<%= will_paginate @results %>
+</body>
+</html>
