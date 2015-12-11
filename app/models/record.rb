@@ -14,14 +14,17 @@ class Record < ActiveRecord::Base
       end
     end
 
+    ii_recs = []
     words.each_pair do |word, count|
       kw = Keyword.find_or_create_by(keyword: word)
       ii = InvertedIndex.new
       ii.record_id = self.id
       ii.keyword_id = kw.id
       ii.count = count
-      ii.save!
+      ii_recs << ii
+      #ii.save!
     end
+    InvertedIndex.import ii_recs
   end
 
 end
